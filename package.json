@@ -1,0 +1,25 @@
+{
+  "name": "electron-hello",
+  "version": "1.0.0",
+  "main": "main.js",
+  "description": "Electron Hello World",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win",
+    "dist:win": "electron-builder --win",
+    "dist:linux": "electron-builder --linux",
+    "dist:mac": "electron-builder --mac"
+  },
+  "build": {
+    "appId": "com.example.electronhello",
+    "win": { "target": ["nsis", "portable"] },
+    "linux": { "target": ["AppImage"] },
+    "mac": { "target": ["dmg"] }
+  },
+  "devDependencies": {
+    "electron": "^38.2.0",
+    "electron-builder": "^26.0.12"
+  }
+}

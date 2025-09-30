@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <title>Electron Hello</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; }
+    button { padding: .6rem 1rem; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Hello, Electron!</h1>
+  <p id="msg">ボタンを押すとメインプロセスへ「ping」します。</p>
+  <button id="btn">Ping!</button>
+
+  <script>
+    const btn = document.getElementById('btn');
+    const msg = document.getElementById('msg');
+    btn.addEventListener('click', async () => {
+      const res = await window.api.ping();
+      msg.textContent = `応答: ${res}`;
+    });
+  </script>
+</body>
+</html>
