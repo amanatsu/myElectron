@@ -1,25 +1,52 @@
 {
   "name": "electron-hello",
   "version": "1.0.0",
-  "main": "main.js",
-  "description": "Electron Hello World",
+  "main": "electron/main.js",
+  "description": "Electron + Vite + Vue SPA sample",
   "author": "",
   "license": "MIT",
   "scripts": {
-    "start": "electron .",
-    "dist": "electron-builder --win",
-    "dist:win": "electron-builder --win",
-    "dist:linux": "electron-builder --linux",
-    "dist:mac": "electron-builder --mac"
+    "dev": "concurrently -k \"vite\" \"wait-on tcp:5173 && cross-env VITE_DEV_SERVER_URL=http://localhost:5173 electron .\"",
+    "build": "vite build",
+    "dist": "npm run build && electron-builder --win",
+    "dist:win": "npm run dist",
+    "dist:linux": "npm run build && electron-builder --linux",
+    "dist:mac": "npm run build && electron-builder --mac"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.4",
+    "concurrently": "^9.2.1",
+    "cross-env": "^7.0.3",
+    "electron": "^38.2.0",
+    "electron-builder": "^26.0.12",
+    "vite": "^5.4.20",
+    "wait-on": "^8.0.5"
+  },
+  "dependencies": {
+    "vue": "^3.5.22"
   },
   "build": {
     "appId": "com.example.electronhello",
-    "win": { "target": ["nsis", "portable"] },
-    "linux": { "target": ["AppImage"] },
-    "mac": { "target": ["dmg"] }
-  },
-  "devDependencies": {
-    "electron": "^38.2.0",
-    "electron-builder": "^26.0.12"
+    "files": [
+      "dist/**",
+      "electron/**",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    }
   }
 }
